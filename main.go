@@ -64,5 +64,9 @@ func main() {
 	if *ctx != "" {
 		st.Context = ctx
 	}
-	log.Println(client.Repositories.CreateStatus(*owner, *repo, *sha, st))
+	st, _, err := client.Repositories.CreateStatus(*owner, *repo, *sha, st)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Created status", *st.ID)
 }
