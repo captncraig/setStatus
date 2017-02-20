@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/google/go-github/github"
+	"golang.org/x/net/context"
 )
 
 type myRoundTripper struct {
@@ -64,7 +65,7 @@ func main() {
 	if *ctx != "" {
 		st.Context = ctx
 	}
-	st, _, err := client.Repositories.CreateStatus(*owner, *repo, *sha, st)
+	st, _, err := client.Repositories.CreateStatus(context.Background(), *owner, *repo, *sha, st)
 	if err != nil {
 		log.Fatal(err)
 	}
